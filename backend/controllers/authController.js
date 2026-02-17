@@ -6,10 +6,23 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-for-dev-only';
 
 
-const dbPath = path.join(__dirname, '../data/db.json');
+const dbPath = path.join(process.cwd(), 'backend/data/db.json');
 
-const getDB = () => JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-const saveDB = (data) => fs.writeFileSync(dbPath, JSON.stringify(data, null, 4));
+const getDB = () => {
+    try {
+        return JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+    } catch (e) {
+        console.error("DB Read Error:", e);
+        return { users: [], chatRooms: {} }; // Return empty DB if file is missing
+    }
+};
+const saveDB = (data) => {
+    try {
+        fs.writeFileSync(dbPath, JSON.stringify(data, null, 4));
+    } catch (e) {
+        console.error("DB Write Error (Expected on Vercel):", e);
+    }
+};
 
 exports.signup = async (req, res) => {
     try {
