@@ -1,0 +1,97 @@
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.game-tabs {
+    display: flex;
+    background-color: var(--border-light);
+    padding: 0.3rem;
+    border-radius: 12px;
+}
+
+.dark-mode .game-tabs {
+    background-color: var(--sidebar-dark);
+}
+
+.game-tab {
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    color: #64748b;
+}
+
+.game-tab.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.game-viewport {
+    background-color: var(--card-light);
+    border-radius: 1.5rem;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.dark-mode .game-viewport {
+    background-color: #000;
+}
+
+#game-canvas {
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+}
+
+.game-card {
+    text-align: center;
+}
+
+.game-card img {
+    width: 200px;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+}
+
+.leaderboard-section {
+    background-color: var(--card-light);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+}
+
+.dark-mode .leaderboard-section {
+    background-color: var(--card-dark);
+}
+
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+#leaderboard-table th {
+    text-align: left;
+    padding: 1rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+#leaderboard-table td {
+    padding: 1rem;
+    border-top: 1px solid var(--border-light);
+}
+
+.dark-mode #leaderboard-table td {
+    border-top-color: var(--border-dark);
+}

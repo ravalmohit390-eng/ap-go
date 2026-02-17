@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "backend/server.js"
+        },
+        {
+            "source": "/((?!api/).*)",
+            "destination": "/frontend/$1"
+        }
+    ],
+    "env": {
+        "NODE_ENV": "production",
+        "JWT_SECRET": "supersecretkey123"
+    }
+}

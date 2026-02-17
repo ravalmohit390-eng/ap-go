@@ -1,0 +1,117 @@
+{
+    "users": [
+        {
+            "id": 1676200000000,
+            "username": "admin",
+            "email": "admin@example.com",
+            "password": "$2a$10$7R9j6G/A2D2B.fH/Xp7xOe5Q9vXv7vVz5vVz5vVz5vVz5vVz5vVz5",
+            "role": "admin",
+            "profile": {
+                "avatar": "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+        },
+        {
+            "id": 1770891907659,
+            "username": "sujal",
+            "email": "ravalmohit390@gmail.com",
+            "password": "$2b$10$fM1ccCWkljuwDAbJjdOlMu75qhWRqm6UV0HlUzuGiiEFUZCzyzrni",
+            "role": "user",
+            "profile": {
+                "bio": "",
+                "avatar": "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+        },
+        {
+            "id": 1771320649949,
+            "username": "mohit36",
+            "email": "ravalmohit300@gmail.com",
+            "password": "$2b$10$V7UbSSYUWyTghQV0xzGQ3.VwFx58KjCC82HFAtNDbxHcBhhBkCHlK",
+            "role": "user",
+            "profile": {
+                "bio": "",
+                "avatar": "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Gaming Mouse G502",
+            "price": 49.99,
+            "category": "Gaming",
+            "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80"
+        },
+        {
+            "id": 2,
+            "name": "Mechanical Keyboard",
+            "price": 89.99,
+            "category": "Gaming",
+            "image": "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=500&q=80"
+        },
+        {
+            "id": 3,
+            "name": "Wireless Headphones",
+            "price": 129.99,
+            "category": "Electronics",
+            "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80"
+        },
+        {
+            "id": 4,
+            "name": "Curved 4K Monitor",
+            "price": 299.99,
+            "category": "Electronics",
+            "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80"
+        },
+        {
+            "id": 5,
+            "name": "Gaming Chair Premium",
+            "price": 199.99,
+            "category": "Furniture",
+            "image": "https://images.unsplash.com/photo-1598550476439-6847785fce66?w=500&q=80"
+        },
+        {
+            "id": 6,
+            "name": "Smart Watch Series X",
+            "price": 249.99,
+            "category": "Wearables",
+            "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80"
+        }
+    ],
+    "leaderboard": [
+        {
+            "username": "admin",
+            "game": "Snake",
+            "score": 150
+        },
+        {
+            "username": "pro_gamer",
+            "game": "Snake",
+            "score": 280
+        },
+        {
+            "username": "john_doe",
+            "game": "Clicker",
+            "score": 45
+        }
+    ],
+    "tasks": [
+        {
+            "id": 1,
+            "title": "Buy groceries",
+            "completed": false
+        },
+        {
+            "id": 2,
+            "title": "Finish OmniHub Project",
+            "completed": true
+        }
+    ],
+    "notes": [
+        {
+            "id": 1,
+            "content": "Remember to check the gaming leaderboard tomorrow!",
+            "date": "2026-02-12T10:00:00.000Z"
+        }
+    ],
+    "chatRooms": {}
+}

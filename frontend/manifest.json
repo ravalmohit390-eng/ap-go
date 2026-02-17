@@ -1,0 +1,21 @@
+{
+    "name": "ZenFlow Gaming",
+    "short_name": "ZenFlow",
+    "description": "A collection of satisfying and relaxing games.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#00d2ff",
+    "icons": [
+        {
+            "src": "/assets/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

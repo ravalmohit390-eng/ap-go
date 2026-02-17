@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniHub | All-in-One Platform</title>
+    <meta name="description" content="A multi-purpose platform for gaming, shopping, tools, and entertainment.">
+    <meta name="theme-color" content="#00d2ff">
+    <link rel="apple-touch-icon" href="/assets/icon-192x192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+
+<body class="dark-mode">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed', err));
+            });
+        }
+    </script>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <i class="fas fa-hubspot"></i>
+                <span>OmniHub</span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active" data-section="dashboard"><i class="fas fa-th-large"></i> <span>Dashboard</span>
+                    </li>
+                    <li data-section="gaming"><i class="fas fa-gamepad"></i> <span>Gaming</span></li>
+                    <li data-section="shopping"><i class="fas fa-chart-line"></i> <span>Marketing</span></li>
+                    <li data-section="entertainment"><i class="fas fa-film"></i> <span>Entertainment</span></li>
+                    <li data-section="tools"><i class="fas fa-tools"></i> <span>Tools & Utilities</span></li>
+                    <li data-section="chat"><i class="fas fa-comments"></i> <span>Group Chat</span></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info-box" id="sidebar-user-section" style="display: none;">
+                    <img src="" alt="User" id="sidebar-avatar">
+                    <span id="sidebar-name">Guest</span>
+                    <button id="sidebar-logout-btn" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <button id="sidebar-login-btn" class="btn-primary" style="width: 100%;"><i
+                        class="fas fa-sign-in-alt"></i> <span>Login</span></button>
+                <button id="pwa-install-btn" class="btn-primary"
+                    style="width: 100%; margin-top: 10px; background: #10b981; display: none;">
+                    <i class="fas fa-download"></i> <span>Install App</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="global-search" placeholder="Search for tools, games, or products...">
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn" id="theme-toggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                        <span>Theme</span>
+                    </button>
+                    <div class="auth-header-box" id="header-auth-section">
+                        <!-- Login button or Profile will be shown here -->
+                    </div>
+                </div>
+            </header>
+
+            <div class="loader-container" id="main-loader" style="display: none;">
+                <div class="loader"></div>
+            </div>
+            <section id="content-area"></section>
+        </main>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-tabs">
+                <button class="active" id="tab-login">Login</button>
+                <button id="tab-signup">Sign Up</button>
+            </div>
+            <div class="auth-forms">
+                <form id="login-form">
+                    <h2>Welcome Back</h2>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="login-email" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+                </form>
+                <form id="signup-form" style="display: none;">
+                    <h2>Join OmniHub</h2>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="signup-username" required placeholder="johndoe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="signup-email" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="signup-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Create Account</button>
+                </form>
+            </div>
+            <button class="close-modal">&times;</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>
