@@ -13,25 +13,31 @@ app.use(bodyParser.json());
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey123';
 const dbPath = path.join(process.cwd(), 'backend/data/db.json');
 
-// Memory Backup (In case Vercel blocks the file)
-let memoryDB = { users: [], chatRooms: {} };
+// Shared memory state
+let memoryDB = null;
 
 const getDB = () => {
+    if (memoryDB) return memoryDB; // Use cached version if it exists
+
+    let db = { users: [], chatRooms: {} };
     try {
         if (fs.existsSync(dbPath)) {
-            return JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+            db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
         }
     } catch (e) { console.error("DB Read Error", e); }
+
+    if (!db.users) db.users = [];
+    if (!db.chatRooms) db.chatRooms = {};
+
+    memoryDB = db; // Cache for future requests in this Lambda execution
     return memoryDB;
 };
 
 const saveDB = (data) => {
-    memoryDB = data; // Always update memory
+    memoryDB = data;
     try {
-        if (fs.existsSync(path.dirname(dbPath))) {
-            fs.writeFileSync(dbPath, JSON.stringify(data, null, 4));
-        }
-    } catch (e) { console.log("Permanent storage restricted on Vercel - Using memory."); }
+        fs.writeFileSync(dbPath, JSON.stringify(data, null, 4));
+    } catch (e) { /* Silent fail on Vercel */ }
 };
 
 // --- AUTH ROUTES ---
@@ -72,9 +78,37 @@ app.get('/api/chat/rooms/:roomId', (req, res) => {
 
 app.post('/api/chat/rooms/:roomId/messages', (req, res) => {
     const { roomId } = req.params;
+    const { username, text } = req.body;
     const db = getDB();
+
     if (!db.chatRooms[roomId]) db.chatRooms[roomId] = [];
-    db.chatRooms[roomId].push({ ...req.body, timestamp: new Date() });
+
+    // Add user message
+    const userMsg = { username, text, timestamp: new Date() };
+    db.chatRooms[roomId].push(userMsg);
+
+    // Dynamic Chatbot Logic (ZenBot)
+    const lowerText = text.toLowerCase();
+    let botResponse = null;
+
+    if (lowerText.includes('hello') || lowerText.includes('hi')) {
+        botResponse = "Hello! I'm ZenBot. How can I help you today?";
+    } else if (lowerText.includes('game')) {
+        botResponse = "I love games! You should try 'Space Ranger' or 'Rise of Goku' in our Gaming Hub!";
+    } else if (lowerText.includes('market') || lowerText.includes('shop')) {
+        botResponse = "Check out the Marketing section for trending products and our EMI calculator!";
+    } else if (lowerText.includes('help')) {
+        botResponse = "I am ZenBot, your OmniHub assistant. You can create private chat rooms here or explore our games and tools!";
+    }
+
+    if (botResponse) {
+        db.chatRooms[roomId].push({
+            username: '🤖 ZenBot',
+            text: botResponse,
+            timestamp: new Date()
+        });
+    }
+
     saveDB(db);
     res.json({ success: true });
 });

@@ -1750,3 +1750,73 @@ window.startChatRoom = async (roomId) => {
     };
 };
 
+// --- ZENBOT FLOATING ASSISTANT LOGIC ---
+window.toggleZenBot = () => {
+    const win = document.getElementById('zenbot-window');
+    const bubble = document.getElementById('zenbot-bubble');
+    if (!win) return;
+
+    const isHidden = win.style.display === 'none' || win.style.display === '';
+    win.style.display = isHidden ? 'flex' : 'none';
+
+    if (isHidden) {
+        document.getElementById('zenbot-input').focus();
+        bubble.style.transform = 'scale(0.9) rotate(15deg)';
+    } else {
+        bubble.style.transform = 'scale(1) rotate(0deg)';
+    }
+};
+
+window.sendZenBotMessage = () => {
+    const input = document.getElementById('zenbot-input');
+    const text = input.value.trim();
+    if (!text) return;
+
+    // Add user message to UI
+    appendZenBotMsg('You', text, true);
+    input.value = '';
+
+    // Simple Rule-based Logic for the Assistant
+    setTimeout(() => {
+        let response = "I'm still learning! But you can ask me about 'games', 'marketing', or 'chat'.";
+        const lowText = text.toLowerCase();
+
+        if (lowText.includes('hello') || lowText.includes('hi')) response = "Hi! I'm ZenBot, your OmniHub assistant. How's your day going?";
+        else if (lowText.includes('game')) response = "We have Space Ranger, Snake, Clicker, Goku, and even Croc Dentist! Which one do you want to play?";
+        else if (lowText.includes('market')) response = "The Marketing section has trending products, a cart system, and an EMI calculator ready for you.";
+        else if (lowText.includes('chat')) response = "Go to the Group Chat section to create a room. You can even scan QR codes to join your friends!";
+        else if (lowText.includes('who are you')) response = "I am ZenBot, the AI assistant built for OmniHub. I help you navigate and find the best features!";
+
+        appendZenBotMsg('🤖 ZenBot', response, false);
+    }, 800);
+};
+
+function appendZenBotMsg(sender, text, isUser) {
+    const msgArea = document.getElementById('zenbot-messages');
+    const msgDiv = document.createElement('div');
+    msgDiv.style.cssText = `
+        padding: 10px 14px;
+        border-radius: 12px;
+        max-width: 85%;
+        word-wrap: break-word;
+        font-size: 0.85rem;
+        background: ${isUser ? 'var(--primary)' : 'rgba(255,255,255,0.05)'};
+        color: ${isUser ? 'white' : 'inherit'};
+        align-self: ${isUser ? 'flex-end' : 'flex-start'};
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin-bottom: 5px;
+        animation: fadeIn 0.3s ease;
+    `;
+    msgDiv.innerHTML = `<strong style="display:block; font-size:0.7rem; opacity:0.7; margin-bottom:4px;">${sender}</strong>${text}`;
+    msgArea.appendChild(msgDiv);
+    msgArea.scrollTop = msgArea.scrollHeight;
+}
+
+// Global Enter key for ZenBot
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && document.activeElement.id === 'zenbot-input') {
+        sendZenBotMessage();
+    }
+});
+
+
